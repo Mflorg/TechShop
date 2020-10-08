@@ -10,13 +10,13 @@ module.exports = (sequelize)=>{
             autoIncrement: true,
             allowNull: true
             
-        },         
-        categoryId:{
+        }
+/*         categoryId:{
             type: DataTypes.INTEGER,
         },
         productId: {
             type: DataTypes.INTEGER,
-
-        }    
-    });
+        } */   
+    })
 }
+

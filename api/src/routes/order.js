@@ -11,6 +11,10 @@ server.get('/', (req,res)=>{
     .then(orders=>{
         res.send(orders)
     })
+    .catch(err=>{
+        console.log(err)
+        res.json([]);
+    })
     
     }
     else {
@@ -24,7 +28,8 @@ server.get('/', (req,res)=>{
         })
         .catch(err=>{
             console.log(err)
-            res.send("algo malir sal");})
+            res.json([]);
+        })
         }
 })
 
@@ -149,7 +154,7 @@ server.get('/state/:id/:cancel', (req, res) => {
                     case 'procesando':
                         Order.update(
                             {
-                                estado: 'enviada'
+                                estado: 'completada'
                             },
                             {
                                 where:
@@ -175,9 +180,9 @@ server.get('/state/:id/:cancel', (req, res) => {
                                                 </head>
                                                 <body>
                                                 <div style="text-align: justify; font-size: 16px">
-                                                <h1>Hola ${user.name}!</h1>
-                                                <p>Ya esta en camino tu pedido!<br/>
-                                                En los próximos dias te encontraras con tus productos <3</p>
+                                                <h1>Muchas gracias por elegirnos, ${user.name}!</h1>
+                                                <p>Esperamos que disfrutes mucho de tu compra! </br>
+                                                </p>
                                                 </div>
                                                 </body>
                                                 <hr/>
@@ -207,89 +212,7 @@ server.get('/state/:id/:cancel', (req, res) => {
                                     })
                             })
                         break;
-                    case 'enviada':
-                        Order.update(
-                            {
-                                estado: 'completada'
-                            },
-                            {
-                                where:
-                                {
-                                    id: respuesta.dataValues.id
-                                }
-                            }
-                        )
-                            .then(resp => {
-                                Order.findAll({include: {
-                                    model: User
-                                }})
-                                    .then(order => {
-                                        let {user} = order[0];
-                                        return (
-                                            transporter.sendMail({
-                                                from:'TechShop',
-                                                to: user.email,
-                                                subject: "Muchas gracias por confiar",
-                                                html: `<html>
-                                                <head>
-                                                <img alt=logo src="https://i.postimg.cc/HkK8ZKHm/header.jpg" style="width:100% ;max-height:150px"/>
-                                                </head>
-                                                <body>
-                                                <div style="text-align: justify; font-size: 16px">
-                                                <h1>Muchas gracias por elegirnos, ${user.name}!</h1>
-                                                <p>Esperamos que disfrutes mucho de tu compra! </br>
-                                                </p>
-                                                </div>
-                                                </body>
-                                                <hr/>
-                                                <footer>
-                                                <div style="width:100% ; text-align: center">
-                                                <a style="text-decoration: none; border-radius: 5px; padding:11px 23px; color: white; background-color: #3498db" href="http://localhost:3006/" >Volve a nuestra Tienda -> </a>
-                                                </div>
-                                                <div>
-                                                <p style="color:#b3b3b3 ; font-size:12px; text-align: center">Tech Shop 2020.</p>
-                                                </div>
-                                                </footer>
-                                                </html>
-                                                        `
-                                            }, function (error, info){
-                                                if (error) {
-                                                    console.log(error);
-                                                    res.status(500);
-                                                    res.send(error);
-                                                    return
-                                                } else {
-                                                    res.send('orden modificada correctamente. Enviando mail');
-                                                    res.status(200).json(req.body);
-                                                    return
-                                                }
-                                            })
-                                            );
-                                    })
-                            })
-                        break;
-                    case 'completada':
-                        Order.update(
-                            {
-                                estado: 'completada'
-                            },
-                            {
-                                where:
-                                {
-                                    id: respuesta.dataValues.id
-                                }
-                            }
-                        )
-                            .then(resp => {
-                                Order.findAll({include: {
-                                    model: User
-                                }})
-                                    .then(order => {
-                                        let {user} = order[0];
-                                        return res.send(order);
-                                    })
-                            })
-                        break;
+                   
                     default:
                         break;
                 }
@@ -298,7 +221,7 @@ server.get('/state/:id/:cancel', (req, res) => {
                 console.log(err)
                 res.send(err)
             })
-    } else {
+    } else if(cancel === "true") {
         Order.findOne({
             where: {
                 id: orderId
@@ -366,7 +289,69 @@ server.get('/state/:id/:cancel', (req, res) => {
             .catch(err => {
                 return res.send(err);
             })
+    }else {
+        if (respuesta.dataValues.estado !== 'completada') {
+        Order.update(
+            {
+                estado: 'enviada'
+            },
+            {
+                where:
+                {
+                    id: respuesta.dataValues.id
+                }
+            }
+        )
+            .then(resp => {
+                Order.findAll({include: {
+                    model: User
+                }})
+                    .then(order => {
+                        let {user} = order[0];
+                        return (
+                            transporter.sendMail({
+                                from:'TechShop',
+                                to: user.email,
+                                subject: "Muchas gracias por confiar",
+                                html: `<html>
+                                <head>
+                                <img alt=logo src="https://i.postimg.cc/HkK8ZKHm/header.jpg" style="width:100% ;max-height:150px"/>
+                                </head>
+                                <body>
+                                <div style="text-align: justify; font-size: 16px">
+                                <h1>Hola ${user.name}!</h1>
+                                <p>Ya esta en camino tu pedido!<br/>
+                                En los próximos dias te encontraras con tus productos <3</p>
+                                </div>
+                                </body>
+                                <hr/>
+                                <footer>
+                                <div style="width:100% ; text-align: center">
+                                <a style="text-decoration: none; border-radius: 5px; padding:11px 23px; color: white; background-color: #3498db" href="http://localhost:3006/" >Volve a nuestra Tienda -> </a>
+                                </div>
+                                <div>
+                                <p style="color:#b3b3b3 ; font-size:12px; text-align: center">Tech Shop 2020.</p>
+                                </div>
+                                </footer>
+                                </html>
+                                        `
+                            }, function (error, info){
+                                if (error) {
+                                    console.log(error);
+                                    res.status(500);
+                                    res.send(error);
+                                    return
+                                } else {
+                                    res.send('orden modificada correctamente. Enviando mail');
+                                    res.status(200).json(req.body);
+                                    return
+                                }
+                            })
+                            );
+                    })
+            })
     }
+}
 })
 
 module.exports= server;

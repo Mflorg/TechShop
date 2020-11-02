@@ -26,6 +26,12 @@ const useStyles = makeStyles((theme) => ({
     width: '100%', 
     marginTop: theme.spacing(1),
   },
+  large: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+    // background:"#ffffff",
+    marginRight:theme.spacing(2)
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -95,11 +101,11 @@ const handlerOnchange=(e)=>{
             id="password"
             autoComplete="current-password"
             onChange={handlerOnchange}
-          />
-          <FormControlLabel
+          /><br/><br/><br/>
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Recordar"
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth
@@ -118,9 +124,11 @@ const handlerOnchange=(e)=>{
             fullWidth
             variant="contained"
             color="primary"
-            className={style.boton}
+            // className={style.boton}
+            style={{ justifyContent:"center", background:"white",color:"black"}}
+
           >
-           <FcGoogle/>
+           <FcGoogle className={classes.large} /><span> Sign In with Google</span>
           </Button>
           <br/><br/>        
           <Grid container>

@@ -14,6 +14,7 @@ import Cookies from 'universal-cookie'
 export default function ProductCard({userlog,Product}) {
 
     let base64ToString;
+ 
     (Product.img) && (base64ToString = Buffer.from(Product.img.data, "base64").toString())
     const cookies= new Cookies();
     const idUser=cookies.get('id')
@@ -30,7 +31,6 @@ export default function ProductCard({userlog,Product}) {
         .then(fav=>{
             console.log(fav)
             const element=fav.find((element)=>element.id===productId)
-            console.log(element)
             if(element){
                 setHeart(<AiFillHeart className={styles.heart}/>);
                 setvalueHeart(true)

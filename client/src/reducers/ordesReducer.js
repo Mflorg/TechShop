@@ -1,4 +1,4 @@
-import {LIST_ORDERS, ORDER_ID, CAMBIAR_ESTADO_ORDER, CANCELAR_ESTADO_ORDER} from '../actions/order'
+import {LIST_ORDERS, ORDER_ID, CAMBIAR_ESTADO_ORDER, CANCELAR_ESTADO_ORDER, CAMBIAR_ESTADO_ORDER_ENVIADO} from '../actions/order'
 
 const initialState={
     order:[]
@@ -21,6 +21,11 @@ export default (state=initialState, actions)=>{
                      order: actions.orders.data
                 }
             case CANCELAR_ESTADO_ORDER:
+                return {
+                    ...state,
+                     order: actions.orders.data
+                }
+            case CAMBIAR_ESTADO_ORDER_ENVIADO:
                 return {
                     ...state,
                      order: actions.orders.data

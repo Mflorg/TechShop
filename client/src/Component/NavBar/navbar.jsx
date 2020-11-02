@@ -30,6 +30,30 @@ export default function NavBar (islog){
 
     const dispatch=useDispatch();
     const usuario=islog.islog 
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let mybutton = document.getElementById("myBtn");
+
+        
+        window.onscroll = function () { scrollFunction() };
+
+
+        function scrollFunction() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        
+    });
+   
+    function topFunction() {
+        document.body.scrollTop = 0; 
+        document.documentElement.scrollTop = 0; 
+    }
+
 return (
     <>
     <nav className={styles.nav}>
@@ -72,9 +96,9 @@ return (
             <>
             <span className={styles.navSec}>{username ? username : usuario.name }</span>
             <NavDropdown> 
-                <MenuItem onClick={()=>{window.location.href='/me'}} >My Profile</MenuItem>
-                <MenuItem>Your gits</MenuItem>
-                <MenuItem>Starred gists</MenuItem>
+                <MenuItem onClick={()=>{window.location.href='/me'}} >Mi Perfil</MenuItem>
+                <MenuItem onClick={()=>{window.location.href='/compras'}}>Mis Compras</MenuItem>
+                <MenuItem onClick={()=>{window.location.href='/cart'}}>Carrito</MenuItem>
                 <MenuItem onClick={()=>{ limpiarCookies();
                     dispatch(logoutUser())}} >Sign out</MenuItem>
             </NavDropdown>
@@ -90,6 +114,7 @@ return (
         </div>
     </nav>
     <div className={styles.background}></div>
+    <button onClick={topFunction} id="myBtn" className={styles.myBtn} title="Go to top"><i className="fas fa-chevron-up"></i></button>
     </>
  )
 }

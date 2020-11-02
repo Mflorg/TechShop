@@ -142,7 +142,7 @@ export function logoutUser(){
             dispatch({
                 type: LOGOUT_USER
             })
-            console.log(resp)
+  
             localStorage.setItem("stock", JSON.stringify({}))
             localStorage.setItem("carritoLocal", JSON.stringify([]))
             localStorage.setItem("total", JSON.stringify(0))

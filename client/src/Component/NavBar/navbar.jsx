@@ -96,9 +96,9 @@ return (
             <>
             <span className={styles.navSec}>{username ? username : usuario.name }</span>
             <NavDropdown> 
-                <MenuItem onClick={()=>{window.location.href='/me'}} >My Profile</MenuItem>
-                <MenuItem>Your gits</MenuItem>
-                <MenuItem>Starred gists</MenuItem>
+                <MenuItem onClick={()=>{window.location.href='/me'}} >Mi Perfil</MenuItem>
+                <MenuItem onClick={()=>{window.location.href='/compras'}}>Mis Compras</MenuItem>
+                <MenuItem onClick={()=>{window.location.href='/cart'}}>Carrito</MenuItem>
                 <MenuItem onClick={()=>{ limpiarCookies();
                     dispatch(logoutUser())}} >Sign out</MenuItem>
             </NavDropdown>

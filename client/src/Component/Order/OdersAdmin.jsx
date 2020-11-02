@@ -93,14 +93,19 @@ export default function OrdersAdmin() {
             <Card className={styles.card}>
             <Card.Body className={styles.p}>Seleccioné: Estado de la orden </Card.Body>
             </Card>
+
             <select className={styles.select} name ='filtro' id='filtro' onChange={() => dispatch(listOrders())}>
                  <option value="Todos" selected>Todos</option>
                  <option value="creada">Creada</option> 
+            <select className={styles.select} name ='filtro' id= 'filtro'  onChange={() => dispatch(listOrders())}>
+                 <option value="Todos" selected >Todos</option>
+                 <option value="carrito">Carrito</option> 
                  <option value="procesando">Procesando</option>
                  <option value="completada">Completada</option>
                  <option value="cancelada">Cancelada</option>
                  
             </select>
+            
             <Table responsive>
                 <thead>
                     <tr>

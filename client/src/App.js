@@ -58,6 +58,14 @@ function App() {
     <Route exact path='/payment' component={Payment}/>
     <Route exact path='/favoritos' component={FavoriteProducts}/>
     <Route exact path='/compras' component={ComprasUser}/>
+
+    <Route exact path='/me' component={idus && idus!==undefined ? UserProfile: LoginUser}/>
+    <Route exact path='/checkout' component={idus && idus!==undefined ?Checkout:LoginUser}/>
+    <Route exact path='/shipping' component={idus && idus!==undefined ?Shipping:LoginUser}/>
+    <Route exact path='/payment' component={idus && idus!==undefined ?Payment:LoginUser}/>
+    <Route exact path='/favoritos' component={idus && idus!==undefined ?FavoriteProducts:LoginUser}/>
+    <Route exact path='/compras' component={idus && idus!==undefined ?ComprasUser: LoginUser}/>
+
     <Route exact path='/about' component={About} onEnter={userlog}/>
     <Route path='/' component={ Footer } />
 

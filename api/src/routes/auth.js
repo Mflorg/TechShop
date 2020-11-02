@@ -84,7 +84,7 @@ server.get('/logout', isLogged, (req, res)=> {
         res.json({ message: 'Logged out!' });
 });
 
-server.put('/promote/:id', isLogged,(req, res)=>{
+server.put('/promote/:id',(req, res)=>{
   const {id}=req.params
   User.findOne({
     where: {id:id}

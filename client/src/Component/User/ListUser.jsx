@@ -8,6 +8,7 @@ import style from '../FormCategory/FormCategory.module.css'
 import EditUser from './EditUser'
 import FormAddUser from './FormAddUser'
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 
 
@@ -62,6 +63,21 @@ export default function ListUser() {
         })
         dispatch(listUser())
       }
+    const promoverUser=(id)=>{
+        axios.put(`http://localhost:3000/auth/promote/${id}`)
+        .then(us=>{
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Usuario Promovido',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            dispatch(listUser())
+        })
+
+
+    }
 
     return (
         <div className='container-fluid col-lg-8 col-sm-12 p-3 bg-white'>
@@ -112,10 +128,15 @@ export default function ListUser() {
                                         <td>{us.username}</td>
                                         <td>{us.typeUser}</td>
                                         <td>
-                                            <div style={{ width: "110px" }}>
+                                            <div style={{ width: "130px" }}>
                                                 <Button className='btn btn-warning' onClick={() => { editUser(us) }}><FiEdit /></Button>
                                                 {'  '}
                                                 <Button className='btn btn-danger opacity-2' onClick={() => { eliminarU(us) }}><RiDeleteBin6Line /></Button>
+                                                <br/>
+                                                {(us.typeUser==='' ||us.typeUser==='cliente')?
+                                                <button  className="btn btn-success" onClick={() => { promoverUser(us.id) }} style={{width:"90px", marginTop:"3px"}}> Promover </button>
+                                                :<> </>
+                                            }
                                             </div>
                                         </td>
                                     </tr>

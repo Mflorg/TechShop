@@ -4,6 +4,7 @@ import ItemCart from './ItemCart.jsx';
 import styles from './Cart.module.css';
 import { Link } from 'react-router-dom';
 import { modificarStock, listPorductCart, orderLine,mostraTotal,quitarProdCarrito } from "../../actions/cart";
+import { cambiarEstado } from '../../actions/order'
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'universal-cookie'
 
@@ -159,7 +160,7 @@ export default function Cart({islog}) {
 
                     <Card.Footer className={styles.boton}>
                         <Button className={styles.botonCancelar + ' ' + styles.button}>Cancelar</Button>
-                        <Link to='/shipping'><Button className={styles.botonAceptar+' '+styles.button} >Finalizar Compra</Button></Link>
+                        <Link to='/shipping'><Button className={styles.botonAceptar+' '+styles.button} onClick={() => dispatch(cambiarEstado({id:idUser}))}>Finalizar Compra</Button></Link>
                     </Card.Footer>
 
                 </Card>

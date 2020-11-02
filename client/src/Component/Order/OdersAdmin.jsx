@@ -4,7 +4,7 @@ import { Container, Button, Col, Table, Navbar, Nav, Card } from 'react-bootstra
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import styles from './tablaOrdenes.module.css';
-import {listOrders, cambiarEstado, cancelarEstadoOrden } from '../../actions/order'
+import {listOrders, cambiarEstadoEnviado, cancelarEstadoOrden } from '../../actions/order'
 import findbyId from '../../actions/order'
 import axios from 'axios'
 
@@ -34,19 +34,20 @@ export default function OrdersAdmin() {
 
     }
 
-    const items = list_orders.map(item => {
+    const items = list_orders ? list_orders.map(item => {
             // Aca va a ir el filter !
 
-            var cod = document.getElementById("filtro").value;
-            console.log("cod =", cod);
+            var code = document.getElementById("filtro");
+            if(code !== null){
+                var cod = code.value;
                 if(cod == "Todos"){
                     return ( 
                         <tr>
                         <td>{item.id}</td>
                         <td>{item.user}</td>
                         <td>{item.estado}</td>
-                        <td><button className='btn btn-outline-primary btn-sm ml-1' onClick={() => dispatch(cambiarEstado(item.id))}>+</button></td>
-                        <td><button className='btn btn-outline-danger btn-sm ml-1' onClick={() => dispatch(cancelarEstadoOrden(item.id))}>-</button></td>
+                        <td><button className='btn btn-outline-primary btn-sm ml-1' onClick={() => dispatch(cambiarEstadoEnviado({id:item.id,estado:'enviado'}))}>Enviado</button></td>
+                        <td><button className='btn btn-outline-danger btn-sm ml-1' onClick={() => dispatch(cancelarEstadoOrden(item.id))}>Cancelar</button></td>
                         <td>{item.createdAt}</td>
                         <td>{item.updatedAt}</td>
                         <td>
@@ -63,8 +64,8 @@ export default function OrdersAdmin() {
                 <td>{item.id}</td>
                 <td>{item.user}</td>
                 <td>{item.estado}</td>
-                <td><button className='btn btn-outline-primary btn-sm ml-1' onClick={() => dispatch(cambiarEstado(item.id))}>+</button></td>
-                <td><button className='btn btn-outline-danger btn-sm ml-1' onClick={() => dispatch(cancelarEstadoOrden(item.id))}>-</button></td>
+                <td><button className='btn btn-outline-primary btn-sm ml-1' onClick={() => dispatch(cambiarEstadoEnviado({id:item.id,estado:"enviado"}))}>Enviado</button></td>
+                <td><button className='btn btn-outline-danger btn-sm ml-1' onClick={() => dispatch(cancelarEstadoOrden(item.id))}>Cancelar</button></td>
                 <td>{item.createdAt}</td>
                 <td>{item.updatedAt}</td>
                 <td>
@@ -76,8 +77,11 @@ export default function OrdersAdmin() {
                 else {
                      return
                 }
+            }
 }
     })
+    :
+    <div></div>
 
     return (
         <Container>
@@ -89,7 +93,7 @@ export default function OrdersAdmin() {
             <Card className={styles.card}>
             <Card.Body className={styles.p}>Seleccioné: Estado de la orden </Card.Body>
             </Card>
-            <select className={styles.select} name ='filtro' id= 'filtro' onChange={() => dispatch(listOrders())}>
+            <select className={styles.select} name ='filtro' id='filtro' onChange={() => dispatch(listOrders())}>
                  <option value="Todos" selected>Todos</option>
                  <option value="creada">Creada</option> 
                  <option value="procesando">Procesando</option>

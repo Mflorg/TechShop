@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Button, Container, Table,Row,Col } from 'react-bootstrap';
+import { Button, Container, Table, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import style from './FormProduct.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import FormAdd from './formProductAdd';
 import FormEdit from './formProducEdit';
@@ -22,7 +23,7 @@ const FormProductAdmin = () => {
 
         }
 
-    },[])
+    }, [])
 
 
     const [click, setclick] = useState({
@@ -87,8 +88,8 @@ const FormProductAdmin = () => {
 
 
     return (
-        <Container className='container-fluid col-lg-6 col-sm-12 p-3 bg-white '>
-             <Row>
+        <Container className='container-fluid col-lg-8 col-sm-12 p-3 bg-white '>
+            <Row>
                 <Col>
                     <h1 style={{ textAlign: "center" }}>Productos</h1>
                 </Col>
@@ -101,9 +102,9 @@ const FormProductAdmin = () => {
                 {
                     (click.clicked === '') ?
                         <Fragment>
-                            <Link to={'/administrarAdd'}><Button className='mr-3 mb-2' variant="primary" type="button" onClick={clickAdd}>Agregar</Button></Link>
+                            <Link to={'/administrarAdd'}><Button className={style.boton} variant="primary" type="button" onClick={clickAdd}>Agregar</Button></Link>
                             <Table className='table-sm table-bordered table-hover table-responsive-md table-responsive-sm'>
-                                <thead className='thead-dark ' >
+                                <thead className={style.thead} >
                                     <tr>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Descripción</th>
@@ -129,16 +130,3 @@ const FormProductAdmin = () => {
 }
 
 export default FormProductAdmin;
-
-
-
-
-
-
-
-
-
-
-
-
-

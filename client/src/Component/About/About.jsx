@@ -11,12 +11,12 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import { Card, CardColumns, Button } from 'react-bootstrap';
 
 
-let devs = [{name:"Arquel Luciano", stack:"Developer Full Stack Javascript", provincia:"Entre Ríos, Argentina.",link:"",img: luciano, info:""},
-{name:"Betinotti Matias", stack:"Developer Full Stack Javascript", provincia:"Córdoba, Argentina.",link:"https://www.linkedin.com/in/matias-betinotti/",img: mati, info:"Amante de la tecnologia, dedicado y perseverante."},
-{name:"Ferreyra Sebastián", stack:"Developer Full Stack Javascript", provincia:"Entre Ríos, Argentina.",link:"https://www.linkedin.com/in/sebastian-ferreyra/",img: seba, info:""},
-{name:"Gayoso Lucio", stack:"Developer Full Stack Javascript", provincia:"",link:"",img: lucio, info:""},
+let devs = [{name:"Arquel Luciano", stack:"Developer Full Stack Javascript", provincia:"Entre Ríos, Argentina.",link:"https://www.linkedin.com/in/luciano-arquiel-81b338172/",img: luciano, info:""},
+{name:"Betinotti Matias", stack:"Developer Full Stack Javascript", provincia:"Córdoba, Argentina.",link:"https://www.linkedin.com/in/matias-betinotti/",img: mati, info:"Amante de la tecnologia, dedicado y perseverante. Bombero Voluntario a tiempo completo."},
+{name:"Ferreyra Sebastián", stack:"Developer Full Stack Javascript", provincia:"Entre Ríos, Argentina.",link:"https://www.linkedin.com/in/sebastian-ferreyra/",img: seba, info:"Me gustan las matematicas , los videojuegos y los animales!"},
+{name:"Gayoso Lucio", stack:"Developer Full Stack Javascript", provincia:"Buenos Aires, Argentina.",link:"https://www.linkedin.com/in/lucio-ricardo-gayoso-fleitas/",img: lucio, info:""},
 {name:"Gonzalez Florencia", stack:"Developer Full Stack Javascript", provincia:"Tucumán, Argentina.",link:"https://www.linkedin.com/in/florgonzalez27/",img: flor, info:""},
-{name:"Lago Delfina", stack:"Developer Full Stack Javascript", provincia:"Rio Negro, Argentina.",link:"Linkedin www.linkedin.com/in/delfina-lago-b6b2b8145",img: delfi, info:""},
+{name:"Lago Delfina", stack:"Developer Full Stack Javascript", provincia:"Rio Negro, Argentina.",link:"Linkedin www.linkedin.com/in/delfina-lago-b6b2b8145",img: delfi, info:"Nacida en la Patagonia, responsable y creativa. Me encanta sumar conocimiento y experiencia a cada paso que doy"},
 {name:"Prokopio Leandro", stack:"Developer Full Stack Javascript", provincia:"Misiones, Argentina.",link:"https://www.linkedin.com/in/leandro-prokopio-8882321ba",img: leandro, info:""}]
 
 
@@ -46,7 +46,7 @@ export default function About() {
                 </div>
                 <div style={{background: "#fbfbfb",padding: "20px",textAlign: "center",position: "relative"}}>
                 <p >{dev.stack}</p>
-                  <p style={{margin: "20px 30px"}}>{dev.info}<br/>
+                  <p style={{fontStyle : "italic"}}>{dev.info}<br/>
                   </p>
                   <a href={dev.link} target="_blank">
                   <LinkedInIcon/>
@@ -62,7 +62,8 @@ export default function About() {
 // <Card.Title style={{ color: '#3f51b5', fontWeight: 'bold' }}>{dev.name}</Card.Title>
 //     <Card.Text class="col.sm">
 //       {dev.stack} <br />
-//               {dev.provincia}<br />
+//        <p style={{fontStyle : "italic"}}>{dev.info}</p><br />
+//               {dev.provincia}
         
 //               </Card.Text>
 //             <a href={dev.link} target="_blank">
@@ -70,6 +71,8 @@ export default function About() {
 //             </a>
 //           </Card.Body>
 //         </Card>
+
+
         )}
         </div>
 

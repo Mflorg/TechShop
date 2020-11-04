@@ -1,3 +1,11 @@
+import React from 'react';
+import './App.css';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import FormCategory from './Component/FormCategory/FormCategory.jsx'
+import Product from './Component/Product/Product.jsx'
+import Catalogue from './Component/Catalogue/Catalogue.jsx'
+import LoginUser from './Component/LoginUser/LoginUser'
+import Cart from './Component/carrito/Cart.jsx'
 import { useSelector } from 'react-redux';
 import ListUser from './Component/User/ListUser'
 import FormAddUser from './Component/User/FormAddUser'

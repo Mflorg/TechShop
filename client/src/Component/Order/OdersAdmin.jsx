@@ -103,7 +103,7 @@ export default function OrdersAdmin() {
                  <option value="procesando">Procesando</option>
                  <option value="completada">Completada</option>
                  <option value="cancelada">Cancelada</option>
-                 
+            </select>    
             </select>
             
             <Table responsive>
